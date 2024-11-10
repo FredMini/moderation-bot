@@ -16,13 +16,13 @@ async def get_id_command(event, username=None):
         # Находим пользователя с заданным username
         for participant in participants:
             if participant.username and participant.username.lower() == username.lower():  # Сравниваем без учета регистра
-                await event.respond(f"User ID для @{username}: {participant.id}")
+                await event.respond(f"Реестр: User ID для @{username}: {participant.id}")
                 return
         
-        await event.respond(f"Ошибка: не удалось найти пользователя с username @{username} в группе.")
+        await event.respond(f"Ошибка: не удалось найти Адептус @{username} в реестре.")
     else:
         # Если username не указан, выводим сообщение о том, что не был указан пользователь
-        await event.respond("Ошибка: укажите username в формате @username.")
+        await event.respond("Ошибка: укажите имя пользователя в формате @username.")
 
 # Регистрация обработчика в main.py
 def register_get_id_handler(client: TelegramClient):
@@ -40,4 +40,4 @@ def register_get_id_handler(client: TelegramClient):
             await get_id_command(event, username)
         else:
             # Если username не найден, отправляем ошибку
-            await event.respond("Ошибка: укажите username в формате @username.")
+            await event.respond("Ошибка: укажите имя пользователя в формате @username.")

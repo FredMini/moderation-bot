@@ -28,7 +28,7 @@ async def create_or_update_role_command(event, role_id, role_name):
                 {"role_id": role_id},  # Поиск по role_id
                 {"$set": {"role_name": role_name}}  # Обновление только имени роли
             )
-            await event.respond(f"Роль с ID {role_id} уже существовала. Название обновлено на \"{role_name}\".")
+            await event.respond(f"Роль {role_id} обновлена на {role_name} и изменения внесены в реестр.")
         else:
             # Создаем новую роль
             new_role = {
@@ -39,7 +39,7 @@ async def create_or_update_role_command(event, role_id, role_name):
             
             # Вставляем роль в коллекцию
             roles_collection.insert_one(new_role)
-            await event.respond(f"Роль с ID {role_id} и названием \"{role_name}\" успешно создана.")
+            await event.respond(f"Роль с ID {role_id} и названием \"{role_name}\" успешно внесена в реестр.")
     else:
         await event.respond("Ошибка подключения к базе данных.")
 

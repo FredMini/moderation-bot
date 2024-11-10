@@ -33,7 +33,7 @@ def load_modules():
         if filename.endswith('.py') and filename != '__init__.py':  # исключаем __init__.py
             module_name = filename[:-3]  # Убираем '.py' из имени
             try:
-                # Импортируем модуль с помощью importlib
+                # импортируем модули и их обработчики к основному файлу (необходимо в связи с тем, что скрипты должны вызываться из основного файла)
                 module = importlib.import_module(f'modules.{module_name}')
                 if hasattr(module, 'register_get_id_handler'):
                     module.register_get_id_handler(client)
@@ -41,7 +41,15 @@ def load_modules():
                     module.register_create_role_handler(client)
                 if hasattr(module, 'register_get_delete_role_handler'):
                     module.register_get_delete_role_handler(client)
+                if hasattr(module, 'register_assign_role_handler'):
+                    module.register_assign_role_handler(client)
+                if hasattr(module, 'register_revoke_role_handler'):
+                    module.register_revoke_role_handler(client)
+                if hasattr(module, 'register_admin_list_handler'):
+                    module.register_admin_list_handler(client)  
                 logger.info(f"Модуль {module_name} успешно загружен.")
+                
+
             except Exception as e:
                 logger.error(f"Ошибка при загрузке модуля {module_name}: {e}")
 

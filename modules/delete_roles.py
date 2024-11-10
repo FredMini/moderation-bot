@@ -24,9 +24,9 @@ async def delete_role_command(event, role_id):
         if existing_role:
             # Удаляем роль из базы данных
             roles_collection.delete_one({"role_id": role_id})
-            await event.respond(f"Роль с ID {role_id} успешно удалена.")
+            await event.respond(f"Роль с ID {role_id} успешно убрана из реестра.")
         else:
-            await event.respond(f"Ошибка: Роль с ID {role_id} не существует.")
+            await event.respond(f"Ошибка: Роль с ID {role_id} не найдена в реестре.")
     else:
         await event.respond("Ошибка подключения к базе данных.")
 
@@ -49,4 +49,4 @@ def register_get_delete_role_handler(client):
                 else:
                     await event.respond("Ошибка: ID роли должен быть в диапазоне от 0 до 255.")
             else:
-                await event.respond('Ошибка: Неверный формат команды. Используйте "Удалить роль ID".')
+                await event.respond('Ошибка: Неверный формат команды. Используйте "удалить роль ID".')
