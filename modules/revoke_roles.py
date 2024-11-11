@@ -59,11 +59,11 @@ def register_revoke_role_handler(client: TelegramClient):
         command_text = event.message.text.strip()
 
         # Проверка на команду
-        if 'разжаловать' in command_text.lower():  # Проверяем, есть ли подстрока 'разжаловать'
+        if command_text.lower().startswith('!разжаловать'):  # Проверяем, начинается ли команда с !разжаловать
             # Используем регулярное выражение для извлечения username
             match = re.match(r'разжаловать\s+@(\w+)', command_text)
             if match:
                 username_original = match.group(1)  # Используем оригинальный @username из команды
                 await revoke_role_command(event, username_original)
             else:
-                await event.respond('Ошибка: Неверный формат команды. Используйте "Разжаловать @username".')
+                await event.respond('Ошибка: Неверный формат команды. Используйте "разжаловать @username".')

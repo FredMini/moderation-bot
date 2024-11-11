@@ -54,7 +54,7 @@ def register_assign_role_handler(client: TelegramClient):
         command_text = event.message.text.strip()
 
         # Проверка на команду
-        if 'присвоить роль' in command_text.lower():  # Проверяем, есть ли подстрока 'присвоить роль'
+        if command_text.lower().startswith('присвоить роль'):  # Проверяем, начинается ли команда с !присвоить роль
             # Используем регулярное выражение для извлечения ID и username
             match = re.match(r'присвоить роль\s+(\d{1,3})\s+@(\w+)', command_text)
             if match:
@@ -67,4 +67,4 @@ def register_assign_role_handler(client: TelegramClient):
                 else:
                     await event.respond("Ошибка: ID роли должен быть в диапазоне от 0 до 255.")
             else:
-                await event.respond('Ошибка: Неверный формат команды. Используйте "Присвоить роль ID @username".')
+                await event.respond('Ошибка: Неверный формат команды. Используйте "присвоить роль ID @username".')

@@ -48,8 +48,10 @@ def load_modules():
                 if hasattr(module, 'register_admin_list_handler'):
                     module.register_admin_list_handler(client)  
                 logger.info(f"Модуль {module_name} успешно загружен.")
-                
-
+                if hasattr(module, 'register_mute_handler'):
+                    module.register_mute_handler(client)
+                if hasattr(module, 'register_unmute_handler'):
+                    module.register_unmute_handler(client)
             except Exception as e:
                 logger.error(f"Ошибка при загрузке модуля {module_name}: {e}")
 
