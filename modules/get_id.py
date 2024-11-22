@@ -26,7 +26,7 @@ async def get_id_command(event, username=None):
 
 # Регистрация обработчика в main.py
 def register_get_id_handler(client: TelegramClient):
-    @client.on(events.NewMessage(func=lambda e: e.is_group and e.text.startswith('getid')))
+    @client.on(events.NewMessage(func=lambda e: e.is_group and e.text.startswith('/getid')))
     async def handler(event):
         # Извлекаем команду и аргумент (если он есть)
         command_text = event.message.text

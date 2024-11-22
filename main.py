@@ -46,12 +46,16 @@ def load_modules():
                 if hasattr(module, 'register_revoke_role_handler'):
                     module.register_revoke_role_handler(client)
                 if hasattr(module, 'register_admin_list_handler'):
-                    module.register_admin_list_handler(client)  
-                logger.info(f"Модуль {module_name} успешно загружен.")
+                    module.register_admin_list_handler(client)
                 if hasattr(module, 'register_mute_handler'):
                     module.register_mute_handler(client)
                 if hasattr(module, 'register_unmute_handler'):
                     module.register_unmute_handler(client)
+                if hasattr(module, 'register_admins_handler'):
+                    module.register_admins_handler(client)
+                if hasattr(module, 'register_creator_handler'):
+                    module.register_creator_handler(client) 
+                logger.info(f"Модуль {module_name} успешно загружен.")
             except Exception as e:
                 logger.error(f"Ошибка при загрузке модуля {module_name}: {e}")
 
